@@ -9,4 +9,5 @@ public interface IBaseRepository<TEntity> where TEntity : EntityBase
     Task<TEntity> UpdateAsync(TEntity entity);
     Task<TEntity> GetByIdAsync(Guid id);
     Task<IEnumerable<TEntity>> GetAllAsync();
+    Task<bool> ExistAsync(Guid id);
 }

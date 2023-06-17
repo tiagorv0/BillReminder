@@ -2,6 +2,6 @@
 using BillReminder.Infra.Repository.Common;
 
 namespace BillReminder.Infra.Repository.Interfaces;
-public interface IReminderRepository : IBaseRepository<Reminder>
+public interface IReminderRepository : IBaseWithDeleteRepository<Reminder>
 {
 }

@@ -4,7 +4,7 @@ using BillReminder.Infra.Repository.Common;
 using BillReminder.Infra.Repository.Interfaces;
 
 namespace BillReminder.Infra.Repository;
-public class ReminderRepository : BaseRepository<Reminder>, IReminderRepository
+public class ReminderRepository : BaseWithDeleteRepository<Reminder>, IReminderRepository
 {
     public ReminderRepository(BillReminderContext context) : base(context)
     {

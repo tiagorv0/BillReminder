@@ -11,4 +11,5 @@ public class BillResponse
     public DateTime ExpireDate { get; set; }
     public string Comment { get; set; }
     public DateTime CreatedAt { get; set; }
+    public string CategoryName { get; set; }
 }

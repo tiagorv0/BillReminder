@@ -36,4 +36,9 @@ public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : 
     {
         return await _context.Set<TEntity>().ToListAsync();
     }
+
+    public virtual async Task<bool> ExistAsync(Guid id)
+    {
+        return await _context.Set<TEntity>().AnyAsync(x => x.Id == id);
+    }
 }

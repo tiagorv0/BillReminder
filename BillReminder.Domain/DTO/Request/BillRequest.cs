@@ -7,4 +7,6 @@ public record BillRequest(
      BillStatus Status,
      ReferenceMonth ReferenceMonth,
      DateTime ExpireDate,
-     string Comment);
+     string Comment,
+     Guid AccountId,
+     Guid CategoryId);
