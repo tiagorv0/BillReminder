@@ -28,6 +28,8 @@ public class BillMapping : BaseMapping<Bill>
         builder.HasOne(x => x.Reminder)
             .WithOne(x => x.Bill)
             .HasForeignKey<Bill>(x => x.ReminderId)
-            .HasConstraintName("FK_Bill_Reminder");
+            .HasConstraintName("FK_Bill_Reminder")
+            .IsRequired(false)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

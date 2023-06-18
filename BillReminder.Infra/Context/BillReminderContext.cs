@@ -6,7 +6,7 @@ public class BillReminderContext : DbContext
 {
     public BillReminderContext(DbContextOptions<BillReminderContext> options) : base(options)
     {
-
+        
     }
 
     public DbSet<Reminder> Reminders { get; set; }
@@ -19,5 +19,12 @@ public class BillReminderContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(BillReminderContext).Assembly);
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        base.OnConfiguring(optionsBuilder);
+
+       
     }
 }

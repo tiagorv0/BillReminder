@@ -1,10 +1,3 @@
-﻿
-namespace BillReminder.Domain.DTO.Response;
+﻿namespace BillReminder.Domain.DTO.Response;
 
-public class AccountResponse
-{
-    public Guid Id { get; set; }
-    public DateTime CreateAt { get; set; }
-    public string Name { get; set; }
-    public IEnumerable<BillResponse> Bills { get; set; }
-}
+public record AccountResponse(Guid Id, DateTime CreatedAt, string Name, IEnumerable<BillResponse> Bills);

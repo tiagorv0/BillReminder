@@ -25,7 +25,7 @@ public class CategoryController : BaseController
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> Get(Guid id)
+    public async Task<IActionResult> Get([FromRoute] Guid id)
     {
         var result = await _categoryService.GetByIdAsync(id);
         if (result is null)
@@ -41,7 +41,7 @@ public class CategoryController : BaseController
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Put(Guid id, [FromBody] CategoryRequest request)
+    public async Task<IActionResult> Put([FromRoute] Guid id, [FromBody] CategoryRequest request)
     {
         var result = await _categoryService.UpdateAsync(id, request);
         if (result is null)
@@ -51,7 +51,7 @@ public class CategoryController : BaseController
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(Guid id)
+    public async Task<IActionResult> Delete([FromRoute] Guid id)
     {
         var result = await _categoryService.DeleteAsync(id);
         if (!result)

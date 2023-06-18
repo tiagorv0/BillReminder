@@ -1,13 +1,8 @@
-﻿
-using BillReminder.Domain.Entities;
+﻿namespace BillReminder.Domain.DTO.Response;
 
-namespace BillReminder.Domain.DTO.Response;
-
-public class UserResponse
-{
-    public Guid Id { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public string Name { get; set; }
-    public string Email { get; set; }
-    public IEnumerable<Account> Accounts { get; set; }
-}
+public record UserResponse(
+    Guid Id,
+    DateTime CreatedAt,
+    string Name,
+    string Email,
+    IEnumerable<AccountResponse> Accounts);

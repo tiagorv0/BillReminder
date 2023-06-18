@@ -19,25 +19,25 @@ public class BillController : BaseController
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetById(Guid id)
+    public async Task<IActionResult> GetById([FromRoute] Guid id)
     {
         return ApiResponse(await _billService.GetByIdAsync(id));
     }
 
     [HttpGet("GetAll")]
-    public async Task<IActionResult> GetAllBills(BillParams billParams, Paging page)
+    public async Task<IActionResult> GetAllBills([FromQuery] BillParams billParams, Paging page)
     {
         return ApiResponse(await _billService.GetBillsAsync(billParams, page));
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(BillRequest request)
+    public async Task<IActionResult> Create([FromBody] BillRequest request)
     {
         return ApiResponse(await _billService.CreateAsync(request));
     }
 
     [HttpPut]
-    public async Task<IActionResult> Update(Guid id, BillRequest request)
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] BillRequest request)
     {
         var result = await _billService.UpdateAsync(id, request);
         if (result is null)
@@ -47,7 +47,7 @@ public class BillController : BaseController
     }
 
     [HttpDelete]
-    public async Task<IActionResult> Delete(Guid id)
+    public async Task<IActionResult> Delete([FromRoute] Guid id)
     {
         var result = await _billService.DeleteAsync(id);
         if (!result)

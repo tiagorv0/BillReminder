@@ -1,5 +1,6 @@
 ﻿
 using BillReminder.Domain.DTO.Request;
+using BillReminder.Domain.Enums;
 using BillReminder.Infra.Repository.Interfaces;
 using FluentValidation;
 
@@ -13,9 +14,9 @@ public class BillValidator : AbstractValidator<BillRequest>
 
         RuleFor(x => x.Value).NotEmpty().GreaterThan(0);
 
-        RuleFor(x => x.Status).NotEmpty().IsInEnum();
+        RuleFor(x => x.Status).NotEmpty().Must(x => Enum.IsDefined(typeof(BillStatus), x));
 
-        RuleFor(x => x.ReferenceMonth).NotEmpty().IsInEnum();
+        RuleFor(x => x.ReferenceMonth).NotEmpty().Must(x => Enum.IsDefined(typeof(ReferenceMonth), x));
 
         RuleFor(x => x.ExpireDate).NotEmpty();
 

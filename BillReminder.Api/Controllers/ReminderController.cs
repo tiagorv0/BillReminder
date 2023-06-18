@@ -17,19 +17,19 @@ public class ReminderController : BaseController
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetById(Guid id)
+    public async Task<IActionResult> GetById([FromRoute] Guid id)
     {
         return ApiResponse(await _reminderService.GetByIdAsync(id));
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(ReminderRequest request)
+    public async Task<IActionResult> Create([FromBody] ReminderRequest request)
     {
         return ApiResponse(await _reminderService.CreateAsync(request));
     }
 
     [HttpPut]
-    public async Task<IActionResult> Update(Guid id, ReminderRequest request)
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] ReminderRequest request)
     {
         var result = await _reminderService.UpdateAsync(id, request);
         if (result is null)
@@ -39,7 +39,7 @@ public class ReminderController : BaseController
     }
 
     [HttpDelete]
-    public async Task<IActionResult> Delete(Guid id)
+    public async Task<IActionResult> Delete([FromRoute] Guid id)
     {
         var result = await _reminderService.DeleteAsync(id);
         if (!result)

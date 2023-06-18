@@ -31,7 +31,7 @@ public class UserController : BaseController
     }
 
     [HttpPut("Atualizar")]
-    public async Task<IActionResult> Atualizar(Guid id, [FromBody] UserRequest request)
+    public async Task<IActionResult> Atualizar([FromRoute] Guid id, [FromBody] UserRequest request)
     {
         var result = await _userService.UpdateAsync(id, request);
         if (result is null)
