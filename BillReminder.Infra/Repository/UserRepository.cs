@@ -11,8 +11,13 @@ public class UserRepository : BaseRepository<User>, IUserRepository
     {
     }
 
-    public async Task<User> GetByEmail(string email)
+    public async Task<User> GetByEmailAsync(string email)
     {
-        return await _context.Users.SingleOrDefaultAsync(x => x.Email == email);
+        return await _context.Users.AsNoTracking().SingleOrDefaultAsync(x => x.Email == email);
+    }
+
+    public async Task<bool> ExistByEmailAsync(string email)
+    {
+        return await _context.Users.AsNoTracking().AnyAsync(x => x.Email == email);
     }
 }

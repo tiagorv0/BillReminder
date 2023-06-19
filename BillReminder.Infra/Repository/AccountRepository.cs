@@ -15,9 +15,8 @@ public class AccountRepository : BaseWithDeleteRepository<Account>, IAccountRepo
 
     public async Task<PagedResponse<Account>> GetAccountsAsync(Guid userId, Paging page)
     {
-        var query = _context.Accounts
-            .Where(x => x.UserId == userId)
-            .Include(x => x.Bills);
+        var query = _context.Accounts.AsNoTracking()
+            .Where(x => x.UserId == userId);
 
         return await query.GetPagedAsync(page);
     }

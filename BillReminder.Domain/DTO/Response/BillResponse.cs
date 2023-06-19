@@ -10,4 +10,5 @@ public record BillResponse(
     DateTime ExpireDate,
     string Comment,
     DateTime CreatedAt,
+    Guid CategoryId,
     string CategoryName);

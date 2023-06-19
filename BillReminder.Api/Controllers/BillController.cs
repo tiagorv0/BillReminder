@@ -25,7 +25,7 @@ public class BillController : BaseController
     }
 
     [HttpGet("GetAll")]
-    public async Task<IActionResult> GetAllBills([FromQuery] BillParams billParams, Paging page)
+    public async Task<IActionResult> GetAllBills([FromQuery] BillParams billParams, [FromQuery] Paging page)
     {
         return ApiResponse(await _billService.GetBillsAsync(billParams, page));
     }

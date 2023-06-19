@@ -2,9 +2,11 @@
 using BillReminder.Domain.DTO;
 using BillReminder.Domain.DTO.Request;
 using BillReminder.Domain.DTO.Response;
+using BillReminder.Domain.Params;
 using BillReminder.Infra.Repository.Common;
 using BillReminder.Infra.Repository.Interfaces;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace BillReminder.Application.Service.CategoryService;
 public class CategoryService : BaseService, ICategoryService
@@ -58,17 +60,23 @@ public class CategoryService : BaseService, ICategoryService
 
     public async Task<CategoryResponse> GetByIdAsync(Guid id)
     {
-        var category = await _categoryRepository.GetByIdAsync(id);
+        var category = await _categoryRepository.GetByIdAsync(id, x => x.Include(c => c.Bills));
         if (category is null)
             return default;
 
         return CategoryMapper.Map(category);
     }
 
-    public async Task<PagedResponse<CategoryResponse>> GetCategoriesAsync(Paging page)
+    public async Task<PagedResponse<CategoryResponse>> GetCategoriesAsync(CategoryParams categoryParams, Paging page)
     {
         var userId = GetLoggedUserId();
-        var categories = await _categoryRepository.GetCategoriesAsync(userId, page);
+        var categories = await _categoryRepository.GetCategoriesAsync(userId, categoryParams, page);
         return CategoryMapper.Map(categories);
+    }
+
+    public async Task<IEnumerable<InfoPerCategoryDTO>> GetInfoPerCategoryAsync()
+    { 
+        var categories = await _categoryRepository.GetCategoriesAsync(GetLoggedUserId());
+        return categories.Select(x => new InfoPerCategoryDTO(x.Name, x.Bills.Count, x.Bills.Sum(b => b.Value)));
     }
 }

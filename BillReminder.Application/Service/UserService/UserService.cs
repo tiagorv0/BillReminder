@@ -75,8 +75,8 @@ public class UserService : BaseService, IUserService
 
     public async Task<TokenResponse> HandleLoginAsync(LoginRequest login)
     {
-        var user = await _userRepository.GetByEmail(login.Email);
-        if (!PasswordHasher.Verify(user.HashedPassword, login.Password) || user is null)
+        var user = await _userRepository.GetByEmailAsync(login.Email);
+        if (user is null || !PasswordHasher.Verify(user.HashedPassword, login.Password))
         {
             _notificationCollector.AddNotification(NotificationMessages.LoginInvalido);
             return default;

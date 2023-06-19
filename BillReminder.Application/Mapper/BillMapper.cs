@@ -13,7 +13,6 @@ public static partial class BillMapper
     
     public static partial Bill Map(BillRequest request);
 
-    [MapProperty(nameof(Bill.Category.Name), nameof(BillResponse.CategoryName))]
     public static partial BillResponse Map(Bill entity);
     public static partial IEnumerable<BillResponse> Map(IEnumerable<Bill> list);
     public static partial void Map(BillRequest request, Bill entity);

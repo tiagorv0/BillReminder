@@ -2,6 +2,7 @@
 using BillReminder.Application.Service.CategoryService;
 using BillReminder.Domain.DTO;
 using BillReminder.Domain.DTO.Request;
+using BillReminder.Domain.Params;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,9 +20,9 @@ public class CategoryController : BaseController
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll([FromQuery] Paging page)
+    public async Task<IActionResult> GetAll([FromQuery] CategoryParams categoryParams, [FromQuery] Paging page)
     {
-        return ApiResponse(await _categoryService.GetCategoriesAsync(page));
+        return ApiResponse(await _categoryService.GetCategoriesAsync(categoryParams, page));
     }
 
     [HttpGet("{id}")]
@@ -58,5 +59,11 @@ public class CategoryController : BaseController
             return NotFound();
 
         return ApiResponse(result);
+    }
+
+    [HttpGet("Dados-por-categoria")]
+    public async Task<IActionResult> GetInfoPerCategory()
+    {
+        return ApiResponse(await _categoryService.GetInfoPerCategoryAsync());
     }
 }

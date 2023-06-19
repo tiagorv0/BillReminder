@@ -4,5 +4,6 @@ using BillReminder.Infra.Repository.Common;
 namespace BillReminder.Infra.Repository.Interfaces;
 public interface IUserRepository : IBaseRepository<User>
 {
-    Task<User> GetByEmail(string email);
+    Task<User> GetByEmailAsync(string email);
+    Task<bool> ExistByEmailAsync(string email);
 }
