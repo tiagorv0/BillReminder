@@ -13,4 +13,5 @@ public class BillParams : IParams
     public DateTime? CreatedAt { get; set; }
     public DateTime? ExpireDate { get; set; }
     public string CategoryName { get; set; }
+    public Guid? AccountId { get; set; }
 }

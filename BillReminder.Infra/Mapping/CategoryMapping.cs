@@ -20,9 +20,9 @@ public class CategoryMapping : BaseMapping<Category>
             .HasConstraintName("FK_Category_Bill")
             .OnDelete(DeleteBehavior.Restrict);
 
-        builder.HasOne(x => x.User)
+        builder.HasOne(x => x.Account)
             .WithMany()
-            .HasForeignKey(x => x.UserId)
-            .HasConstraintName("FK_Category_User");
+            .HasForeignKey(x => x.AccountId)
+            .HasConstraintName("FK_Category_Account");
     }
 }

@@ -1,3 +1,3 @@
 ﻿namespace BillReminder.Domain.DTO.Request;
 
-public record CategoryRequest(string Name);
+public record CategoryRequest(string Name, Guid AccountId);

@@ -62,8 +62,8 @@ public class CategoryController : BaseController
     }
 
     [HttpGet("Dados-por-categoria")]
-    public async Task<IActionResult> GetInfoPerCategory()
+    public async Task<IActionResult> GetInfoPerCategory(Guid accountId)
     {
-        return ApiResponse(await _categoryService.GetInfoPerCategoryAsync());
+        return ApiResponse(await _categoryService.GetInfoPerCategoryAsync(accountId));
     }
 }

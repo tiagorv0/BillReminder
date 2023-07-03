@@ -1,6 +1,4 @@
-﻿using BillReminder.Domain.Enums;
-
-namespace BillReminder.Domain.DTO.Request;
+﻿namespace BillReminder.Domain.DTO.Request;
 public record BillRequest(
      string Name,
      decimal Value,
@@ -9,4 +7,5 @@ public record BillRequest(
      DateTime ExpireDate,
      string Comment,
      Guid AccountId,
-     Guid CategoryId);
+     Guid CategoryId,
+     ReminderRequest ReminderRequest);

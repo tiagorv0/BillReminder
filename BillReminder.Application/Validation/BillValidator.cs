@@ -29,5 +29,7 @@ public class BillValidator : AbstractValidator<BillRequest>
         RuleFor(x => x.CategoryId).NotEmpty();
         RuleFor(x => x.CategoryId).Must(x => categoryRepository.ExistAsync(x).Result)
             .WithMessage("Categoria não existe");
+
+        RuleFor(x => x.ReminderRequest).SetValidator(new ReminderValidator());
     }
 }

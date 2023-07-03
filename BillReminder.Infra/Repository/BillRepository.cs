@@ -14,11 +14,11 @@ public class BillRepository : BaseWithDeleteRepository<Bill>, IBillRepository
     {
     }
 
-    public async Task<PagedResponse<Bill>> GetBillsAsync(Guid userId, BillParams billParams, Paging page)
+    public async Task<PagedResponse<Bill>> GetBillsAsync(Guid accountId, BillParams billParams, Paging page)
     {
         var query = _context.Bills.AsNoTracking()
             .Include(x => x.Category)
-            .Where(x => x.Category.UserId.Equals(userId));
+            .Where(x => x.Category.AccountId.Equals(accountId));
 
         if(!string.IsNullOrWhiteSpace(billParams.Name))
             query = query.Where(x => x.Name.Contains(billParams.Name));
@@ -40,6 +40,9 @@ public class BillRepository : BaseWithDeleteRepository<Bill>, IBillRepository
 
         if (!string.IsNullOrWhiteSpace(billParams.CategoryName))
             query = query.Where(x => x.Category.Name.Contains(billParams.CategoryName));
+
+        if(billParams.AccountId.HasValue)
+            query = query.Where(x => x.AccountId.Equals(billParams.AccountId));
 
         return await query.GetPagedAsync(page);
     }

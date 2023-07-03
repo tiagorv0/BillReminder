@@ -25,7 +25,6 @@ public class CategoryService : BaseService, ICategoryService
     public async Task<CategoryResponse> CreateAsync(CategoryRequest request)
     {
         var entity = CategoryMapper.Map(request);
-        entity.UserId = GetLoggedUserId();
 
         var newCategory = await _categoryRepository.CreateAsync(entity);
         await _unitOfWork.CommitAsync();
@@ -74,9 +73,9 @@ public class CategoryService : BaseService, ICategoryService
         return CategoryMapper.Map(categories);
     }
 
-    public async Task<IEnumerable<InfoPerCategoryDTO>> GetInfoPerCategoryAsync()
+    public async Task<IEnumerable<InfoPerCategoryDTO>> GetInfoPerCategoryAsync(Guid accountId)
     { 
-        var categories = await _categoryRepository.GetCategoriesAsync(GetLoggedUserId());
-        return categories.Select(x => new InfoPerCategoryDTO(x.Name, x.Bills.Count, x.Bills.Sum(b => b.Value)));
+        var categories = await _categoryRepository.GetCategoriesAsync(accountId);
+        return categories.Select(x => new InfoPerCategoryDTO(x.Id, x.Name, x.Bills.Count, x.Bills.Sum(b => b.Value)));
     }
 }

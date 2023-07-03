@@ -14,21 +14,21 @@ public class CategoryRepository : BaseWithDeleteRepository<Category>, ICategoryR
     {
     }
 
-    public async Task<PagedResponse<Category>> GetCategoriesAsync(Guid userId, CategoryParams categoryParams, Paging page)
+    public async Task<PagedResponse<Category>> GetCategoriesAsync(Guid accountId, CategoryParams categoryParams, Paging page)
     {
         var query = _context.Categories.AsNoTracking()
-            .Where(c => c.UserId == userId);
+            .Where(c => c.AccountId == accountId);
 
-        if(!string.IsNullOrWhiteSpace(categoryParams.CategoryName)) 
+        if (!string.IsNullOrWhiteSpace(categoryParams.CategoryName))
             query = query.Where(x => x.Name.Contains(categoryParams.CategoryName));
 
         return await query.GetPagedAsync(page);
     }
 
-    public async Task<IEnumerable<Category>> GetCategoriesAsync(Guid userId)
+    public async Task<IEnumerable<Category>> GetCategoriesAsync(Guid accountId)
     {
         return await _context.Categories.AsNoTracking()
-            .Where(c => c.UserId == userId)
+            .Where(c => c.AccountId == accountId)
             .Include(x => x.Bills)
             .ToListAsync();
     }

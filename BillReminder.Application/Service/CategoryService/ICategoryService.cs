@@ -11,5 +11,5 @@ public interface ICategoryService
     Task<bool> DeleteAsync(Guid id);
     Task<CategoryResponse> GetByIdAsync(Guid id);
     Task<PagedResponse<CategoryResponse>> GetCategoriesAsync(CategoryParams categoryParams, Paging page);
-    Task<IEnumerable<InfoPerCategoryDTO>> GetInfoPerCategoryAsync();
+    Task<IEnumerable<InfoPerCategoryDTO>> GetInfoPerCategoryAsync(Guid accountId);
 }
