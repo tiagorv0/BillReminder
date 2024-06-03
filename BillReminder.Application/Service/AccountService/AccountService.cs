@@ -35,8 +35,10 @@ public class AccountService : BaseService, IAccountService
     public async Task<AccountResponse> UpdateAsync(Guid id, AccountRequest request)
     {
         var account = await _accountRepository.GetByIdAsync(id);
+
         if (account is null)
             return default;
+
         AccountMapper.Map(request, account);
 
         var updateAccount = await _accountRepository.UpdateAsync(account);

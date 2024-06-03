@@ -1,5 +1,4 @@
-﻿
-namespace BillReminder.Application.Service.Caching;
+﻿namespace BillReminder.Infra.Caching;
 
 public interface ICachingService
 {

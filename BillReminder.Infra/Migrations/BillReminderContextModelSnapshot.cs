@@ -3,7 +3,6 @@ using System;
 using BillReminder.Infra.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -18,32 +17,30 @@ namespace BillReminder.Infra.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.5")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
-
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("BillReminder.Domain.Entities.Account", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("SMALLDATETIME")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("CreatedAt");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("varchar(30)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .ValueGeneratedOnUpdate()
-                        .HasColumnType("SMALLDATETIME")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("UpdatedAt");
 
                     b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -56,42 +53,45 @@ namespace BillReminder.Infra.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("AccountId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("CategoryId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Comment")
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("SMALLDATETIME")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("CreatedAt");
 
                     b.Property<DateTime>("ExpireDate")
-                        .HasColumnType("SMALLDATETIME");
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsPaid")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("varchar(30)");
 
                     b.Property<int>("ReferenceMonth")
                         .HasColumnType("int");
 
                     b.Property<Guid?>("ReminderId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .ValueGeneratedOnUpdate()
-                        .HasColumnType("SMALLDATETIME")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("UpdatedAt");
 
                     b.Property<decimal>("Value")
@@ -104,8 +104,7 @@ namespace BillReminder.Infra.Migrations
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("ReminderId")
-                        .IsUnique()
-                        .HasFilter("[ReminderId] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Bills");
                 });
@@ -114,23 +113,23 @@ namespace BillReminder.Infra.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("AccountId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("SMALLDATETIME")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("CreatedAt");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("varchar(30)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .ValueGeneratedOnUpdate()
-                        .HasColumnType("SMALLDATETIME")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("UpdatedAt");
 
                     b.HasKey("Id");
@@ -144,28 +143,28 @@ namespace BillReminder.Infra.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("SMALLDATETIME")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("CreatedAt");
 
                     b.Property<string>("Message")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<Guid>("ReminderId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Subject")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .ValueGeneratedOnUpdate()
-                        .HasColumnType("SMALLDATETIME")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("UpdatedAt");
 
                     b.HasKey("Id");
@@ -179,13 +178,13 @@ namespace BillReminder.Infra.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("BillId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("SMALLDATETIME")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("CreatedAt");
 
                     b.Property<int>("HowManyDaysToRemind")
@@ -194,12 +193,12 @@ namespace BillReminder.Infra.Migrations
                     b.Property<int>("HowManyTimes")
                         .HasColumnType("integer");
 
-                    b.Property<bool>("IsEnabled")
+                    b.Property<int>("IsEnabled")
                         .HasColumnType("integer");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .ValueGeneratedOnUpdate()
-                        .HasColumnType("SMALLDATETIME")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("UpdatedAt");
 
                     b.HasKey("Id");
@@ -211,30 +210,30 @@ namespace BillReminder.Infra.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("SMALLDATETIME")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("CreatedAt");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
+                        .HasColumnType("varchar(80)");
 
                     b.Property<string>("HashedPassword")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .ValueGeneratedOnUpdate()
-                        .HasColumnType("SMALLDATETIME")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("UpdatedAt");
 
                     b.HasKey("Id");

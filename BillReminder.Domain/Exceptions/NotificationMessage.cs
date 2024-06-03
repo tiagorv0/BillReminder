@@ -1,7 +1,7 @@
 ﻿
 namespace BillReminder.Domain.Exceptions;
 
-public static class NotificationMessages
+public static class NotificationMessage
 {
     public static string LoginInvalido = "Credenciais incorretas";
 }

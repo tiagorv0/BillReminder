@@ -1,5 +1,6 @@
 using BillReminder.Api.Configuration;
 using BillReminder.Infra.Context;
+using Hangfire;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +8,8 @@ builder.Services
     .AddDatabaseContext(builder.Configuration)
     .AddInfrastructureAndServices(builder.Configuration)
     .AddPresentation()
-    .AddAuthenticationAndAuthorization();
+    .AddAuthenticationAndAuthorization()
+    .ConfigureHangfire(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -28,6 +30,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseHangfireDashboard();
 
 app.UseHttpsRedirection();
 

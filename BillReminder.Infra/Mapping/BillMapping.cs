@@ -19,8 +19,7 @@ public class BillMapping : BaseMapping<Bill>
             .HasColumnType("DECIMAL(18,2)");
 
         builder.Property(x => x.ExpireDate)
-            .IsRequired()
-            .HasColumnType("SMALLDATETIME");
+            .IsRequired();
 
         builder.Property(x => x.Comment)
             .HasMaxLength(100);

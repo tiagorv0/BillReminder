@@ -1,11 +1,10 @@
 ﻿using BillReminder.Application.Mapper;
-using BillReminder.Application.Service;
-using BillReminder.Application.Service.Caching;
 using BillReminder.Application.Service.Jwt;
 using BillReminder.Domain.DTO.Request;
 using BillReminder.Domain.DTO.Response;
 using BillReminder.Domain.Entities;
 using BillReminder.Domain.Exceptions;
+using BillReminder.Infra.Caching;
 using BillReminder.Infra.Repository.Common;
 using BillReminder.Infra.Repository.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -76,9 +75,9 @@ public class UserService : BaseService, IUserService
     public async Task<TokenResponse> HandleLoginAsync(LoginRequest login)
     {
         var user = await _userRepository.GetByEmailAsync(login.Email);
-        if (user is null || !PasswordHasher.Verify(user.HashedPassword, login.Password))
+        if (!PasswordHasher.Verify(user.HashedPassword, login.Password) || user is null)
         {
-            _notificationCollector.AddNotification(NotificationMessages.LoginInvalido);
+            _notificationCollector.AddNotification(NotificationMessage.LoginInvalido);
             return default;
         }
 

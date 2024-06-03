@@ -19,18 +19,13 @@ public class NotificationService : BaseService, INotificationService
         _notificationRepository = notificationRepository;
     }
 
-    public async Task<NotificationResponse> CreateNotificationAsync(BillRequest request)
+    public async Task<NotificationResponse> CreateNotificationAsync(NotificationRequest request)
     {
-        var notification = await _notificationRepository.CreateAsync();
+        var entity = NotificationMapper.Map(request);
+
+        var notification = await _notificationRepository.CreateAsync(entity);
         await _unitOfWork.CommitAsync();
 
         return NotificationMapper.Map(notification);
-    }
-
-    public NotificationResponse FactoryNotification()
-    {
-        return new(
-
-            );
     }
 }

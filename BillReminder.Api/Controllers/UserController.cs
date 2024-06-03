@@ -25,13 +25,13 @@ public class UserController : BaseController
 
     [HttpPost("Registro")]
     [AllowAnonymous]
-    public async Task<IActionResult> Registro([FromBody] UserRequest request)
+    public async Task<IActionResult> Register([FromBody] UserRequest request)
     {
         return ApiResponse(await _userService.CreateAsync(request));
     }
 
     [HttpPut("Atualizar")]
-    public async Task<IActionResult> Atualizar([FromRoute] Guid id, [FromBody] UserRequest request)
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UserRequest request)
     {
         var result = await _userService.UpdateAsync(id, request);
         if (result is null)

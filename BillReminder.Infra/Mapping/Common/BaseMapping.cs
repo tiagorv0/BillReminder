@@ -15,12 +15,10 @@ public class BaseMapping<T> : IEntityTypeConfiguration<T> where T : EntityBase
 
         builder.Property(x => x.CreatedAt)
            .IsRequired()
-           .HasColumnName("CreatedAt")
-           .HasColumnType("SMALLDATETIME");
+           .HasColumnName("CreatedAt");
 
         builder.Property(x => x.UpdatedAt)
            .ValueGeneratedOnUpdate()
-           .HasColumnName("UpdatedAt")
-           .HasColumnType("SMALLDATETIME");
+           .HasColumnName("UpdatedAt");
     }
 }

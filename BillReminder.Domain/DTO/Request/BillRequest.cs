@@ -5,6 +5,7 @@ public record BillRequest(
      int Status,
      int ReferenceMonth,
      DateTime ExpireDate,
+     bool IsPaid,
      string Comment,
      Guid AccountId,
      Guid CategoryId,

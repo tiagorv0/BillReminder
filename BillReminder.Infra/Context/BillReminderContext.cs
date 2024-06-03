@@ -20,11 +20,4 @@ public class BillReminderContext : DbContext
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(BillReminderContext).Assembly);
     }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        base.OnConfiguring(optionsBuilder);
-
-       
-    }
 }

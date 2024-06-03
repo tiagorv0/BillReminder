@@ -10,6 +10,7 @@ public class Bill : EntityBase
     public ReferenceMonth ReferenceMonth { get; set; }
     public DateTime ExpireDate { get; set; }
     public string Comment { get; set; }
+    public bool IsPaid { get; set; }
 
     public Guid CategoryId { get; set; }
     public Category Category { get; set; }

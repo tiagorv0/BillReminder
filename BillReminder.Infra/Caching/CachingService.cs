@@ -1,7 +1,6 @@
-﻿
-using Microsoft.Extensions.Caching.Distributed;
+﻿using Microsoft.Extensions.Caching.Distributed;
 
-namespace BillReminder.Application.Service.Caching;
+namespace BillReminder.Infra.Caching;
 
 public class CachingService : ICachingService
 {
@@ -13,8 +12,8 @@ public class CachingService : ICachingService
         _cache = cache;
         _options = new DistributedCacheEntryOptions
         {
-            AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5),
-            SlidingExpiration = TimeSpan.FromMinutes(1),
+            AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(30),
+            SlidingExpiration = TimeSpan.FromMinutes(30),
         };
     }
 
