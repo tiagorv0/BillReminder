@@ -3,6 +3,7 @@ using System;
 using BillReminder.Infra.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BillReminder.Infra.Migrations
 {
     [DbContext(typeof(BillReminderContext))]
-    partial class BillReminderContextModelSnapshot : ModelSnapshot
+    [Migration("20240604001913_remove-reminder-table")]
+    partial class removeremindertable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

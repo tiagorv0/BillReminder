@@ -9,7 +9,6 @@ public class BillReminderContext : DbContext
         
     }
 
-    public DbSet<Reminder> Reminders { get; set; }
     public DbSet<Account> Accounts { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Bill> Bills { get; set; }

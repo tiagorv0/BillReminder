@@ -18,6 +18,7 @@ public class Bill : EntityBase
     public Guid AccountId { get; set; }
     public Account Account { get; set; }
 
-    public Guid? ReminderId { get; set; }
-    public Reminder Reminder { get; set; }
+    public bool Reminder { get; set; }
+
+    public List<Notification> Notifications { get; set; }
 }

@@ -7,6 +7,6 @@ public record BillRequest(
      DateTime ExpireDate,
      bool IsPaid,
      string Comment,
+     bool Reminder,
      Guid AccountId,
-     Guid CategoryId,
-     ReminderRequest ReminderRequest);
+     Guid CategoryId);

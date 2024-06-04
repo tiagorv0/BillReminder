@@ -24,11 +24,10 @@ public class BillMapping : BaseMapping<Bill>
         builder.Property(x => x.Comment)
             .HasMaxLength(100);
 
-        builder.HasOne(x => x.Reminder)
+        builder.HasMany(x => x.Notifications)
             .WithOne(x => x.Bill)
-            .HasForeignKey<Bill>(x => x.ReminderId)
-            .HasConstraintName("FK_Bill_Reminder")
-            .IsRequired(false)
+            .HasForeignKey(x => x.BillId)
+            .HasConstraintName("FK_Bill_Notification")
             .OnDelete(DeleteBehavior.Cascade);
     }
 }
