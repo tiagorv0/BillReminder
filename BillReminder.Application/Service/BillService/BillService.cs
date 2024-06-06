@@ -3,6 +3,7 @@ using BillReminder.Application.Mapper;
 using BillReminder.Domain.DTO;
 using BillReminder.Domain.DTO.Request;
 using BillReminder.Domain.DTO.Response;
+using BillReminder.Domain.Entities;
 using BillReminder.Domain.Params;
 using BillReminder.Infra.Repository.Common;
 using BillReminder.Infra.Repository.Interfaces;
@@ -70,5 +71,34 @@ public class BillService : BaseService, IBillService
     {
         var pages = await _billRepository.GetBillsAsync(GetLoggedUserId(), billParams, page);
         return BillMapper.Map(pages);
+    }
+
+    public async Task CreateBillRecurrencyAsync()
+    {
+        var bills = await _billRepository.GetAllAsync(x => x.Recurrency && x.CreatedAt >= DateTime.Now.AddMonths(-1));
+
+        var billsOfCurrentMonth = new List<Bill>();
+        foreach (var bill in bills)
+        {
+            var billOfCurrentMonth = new Bill
+            {
+                Name = bill.Name,
+                Value = bill.Value,
+                Status = bill.Status,
+                ReferenceMonth = bill.ReferenceMonth,
+                ExpireDate = bill.ExpireDate.AddMonths(1),
+                Comment = bill.Comment,
+                IsPaid = bill.IsPaid,
+                CategoryId = bill.CategoryId,
+                AccountId = bill.AccountId,
+                Reminder = bill.Reminder,
+                Recurrency = bill.Recurrency,
+            };
+
+            billsOfCurrentMonth.Add(billOfCurrentMonth);
+        }
+
+        await _billRepository.CreateRangeAsync(billsOfCurrentMonth);
+        await _unitOfWork.CommitAsync();
     }
 }

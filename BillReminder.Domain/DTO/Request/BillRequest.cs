@@ -8,5 +8,6 @@ public record BillRequest(
      bool IsPaid,
      string Comment,
      bool Reminder,
+     bool Recurrency,
      Guid AccountId,
      Guid CategoryId);

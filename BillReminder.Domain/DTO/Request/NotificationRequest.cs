@@ -1,2 +1,2 @@
 ﻿namespace BillReminder.Domain.DTO.Request;
-public record NotificationRequest(string Subject, string Message, Guid BillId);
+public record NotificationRequest(string Title, string Message, Guid BillId);

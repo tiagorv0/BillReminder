@@ -13,4 +13,5 @@ public interface IBillService
     Task<bool> DeleteAsync(Guid id);
     Task<BillResponse> GetByIdAsync(Guid id);
     Task<PagedResponse<BillResponse>> GetBillsAsync(BillParams billParams, Paging page);
+    Task CreateBillRecurrencyAsync();
 }

@@ -9,6 +9,8 @@ public record BillResponse(
     ReferenceMonth ReferenceMonth,
     DateTime ExpireDate,
     string Comment,
+    bool Reminder,
+    bool Recurrency,
     DateTime CreatedAt,
     Guid CategoryId,
     string CategoryName);
