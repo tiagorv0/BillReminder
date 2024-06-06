@@ -19,6 +19,7 @@ public class Bill : EntityBase
     public Account Account { get; set; }
 
     public bool Reminder { get; set; }
+    public bool Recurrency { get; set; }
 
     public List<Notification> Notifications { get; set; }
 }

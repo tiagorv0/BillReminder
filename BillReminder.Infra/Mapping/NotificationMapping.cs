@@ -9,7 +9,7 @@ public class NotificationMapping : BaseMapping<Notification>
     {
         base.Configure(builder);
 
-        builder.Property(x => x.Subject)
+        builder.Property(x => x.Title)
             .IsRequired()
             .HasMaxLength(50);
 

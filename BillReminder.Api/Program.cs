@@ -1,4 +1,5 @@
 using BillReminder.Api.Configuration;
+using BillReminder.Api.Job;
 using BillReminder.Infra.Context;
 using Hangfire;
 
@@ -13,6 +14,7 @@ builder.Services
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 var app = builder.Build();
 
@@ -39,5 +41,14 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+ExecuteHangfire();
 
 app.Run();
+
+void ExecuteHangfire()
+{
+    HangfireRecurringJob.StartBillIsDueTodayNotificationJob();
+    HangfireRecurringJob.StartBillIsDueNotificationNotificationJob();
+    HangfireRecurringJob.StartBillWasDueNotificationJob();
+    HangfireRecurringJob.StartBillRecurrencyJob();
+}
