@@ -1,7 +1,7 @@
 <h1 align="center">Bill Reminder</h1>
 <br>
 
-<h2 align="center">Projeto Transfer.Microsservices</h3>
+<h2 align="center">Projeto Bill Reminder</h3>
 
 <p>Projeto de estudo e desenvolvendo conhecimento sobre novos padrões e bibliotecas</p>
 <h3>Proposta: </h3>
